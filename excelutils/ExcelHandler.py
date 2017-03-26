@@ -44,3 +44,13 @@ def create_sheet(workbook, sheet_name):
 # 保存一个工作簿
 def save(workbook, workbook_name):
     workbook.save(workbook_name)
+
+# 以元组的形式获得表中所有行
+def get_sheet_all_rows(sheet):
+    return  list(sheet.rows)
+
+def row_tostring(row):
+    result = ""
+    for cell in row:
+        result = result +"."+cell.value
+    return  result
