@@ -1,5 +1,5 @@
 from excelutils import ExcelHandler
-
+from .Creator import WorkExcelCreator
 class SourceDataHandler():
     # 获得排序key
     def get_sort_key(self, row):
@@ -19,12 +19,15 @@ class SourceDataHandler():
 
         result.sort(key=self.get_sort_key, reverse=True)
 
-        result.insert(0, ['来源名称', '访客数', '浏览量', '收藏人数', '加购人数', '支付买家数'])
+        # result.insert(0, ['来源名称', '访客数',  '收藏人数', '加购人数', '支付买家数'])
 
-        for row in result:
-            sheet.append(row)
+        creator = WorkExcelCreator()
 
-        ExcelHandler.save(workbook, filename)
+        creator.work("test.xlsx", result)
+        # for row in result:
+        #     sheet.append(row)
+        #
+        # ExcelHandler.save(workbook, filename)
 
     # 查找在数组中的位置
     def index_of_list(self, list, row):
@@ -41,7 +44,7 @@ class SourceDataHandler():
     # 合并单元行
     def survival(self, lists, row):
 
-        indexs = [0, 1, 2, 6, 7, 11]
+        indexs = [0, 1, 6, 7, 11]
         index = 1
         result = []
         indexolist = self.index_of_list(lists, row)
